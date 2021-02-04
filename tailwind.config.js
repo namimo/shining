@@ -1,9 +1,9 @@
 const colors = require("tailwindcss/colors")
 const { theme } = require("tailwindcss/defaultConfig")
-// const { scrollbar } = require("./tailwind.plugin")
 
 module.exports = {
   purge: {
+    enabled: process.env.NODE_ENV === "production",
     content: [
       // ...
       "./index.html",

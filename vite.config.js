@@ -26,9 +26,6 @@ const config = {
       defaultStyle: "",
     }),
   ],
-  ssgOptions: {
-    script: "async",
-  },
 }
 
 export default config

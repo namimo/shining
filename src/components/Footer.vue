@@ -58,16 +58,18 @@ export default defineComponent({
             <button class="focus:outline-none" @click="toggle">Disclamer</button>
           </template>
           <template #body>
-            <div class="flex flex-col space-y-4">
+            <h2 class="text-3xl text-gray-900 uppercase sm:text-4xl">Privacy & Policy</h2>
+            <hr class="my-4" />
+            <div class="flex flex-col space-y-6">
               <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p.title">
-                <h3 class="text-2xl font-semibold">{{ p.title }}</h3>
-                <p>
+                <h3 class="text-2xl font-semibold text-gray-800">{{ p.title }}</h3>
+                <p class="leading-relaxed text-gray-600">
                   {{ p.content }}
                 </p>
               </div>
             </div>
 
-            <p class="mt-10 text-sm text-gray-600">
+            <p class="mt-10 text-sm text-gray-400">
               If you have any questions or concerns, please contact us via the email address
               provided below.
             </p>

@@ -20,14 +20,18 @@ export default defineComponent({
     <h1
       class="text-3xl font-bold leading-relaxed tracking-wider text-center text-transparent sm:text-5xl lg:text-6xl"
     >
-      <span class="text-white"> iPhone 12 PRO </span>
+      <span class="text-white"> iPhone 12 Pro </span>
       <br />
       <span class="inline-flex text-5xl text-lightBlue-500 lg:text-7xl">
         GIVE
         <span class="text-white">AWAY</span>
       </span>
     </h1>
-    <img src="../assets/iphone.png" alt="iphone-stack" class="my-12 scale-up-center" />
+    <picture>
+      <source srcset="../assets/iphone.webp" type="image/webp" />
+      <source srcset="../assets/iphone.png" type="image/png" />
+      <img src="../assets/iphone.png" alt="iphone-stack" class="my-12 scale-up-center" />
+    </picture>
     <button
       class="px-8 py-2.5 text-lg tracking-wide rounded-full bg-gradient-to-br from-lightBlue-500 to-gray-700 font-semi-bold lg:text-3xl focus:outline-none"
       @click="router.push(`/giveaway`)"

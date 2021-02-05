@@ -3,7 +3,7 @@ import { defineComponent } from "vue"
 import { useHead } from "@vueuse/head"
 
 export default defineComponent({
-  setup() {
+  setup: () => {
     useHead({
       title: "Giveaway Sign up",
     })

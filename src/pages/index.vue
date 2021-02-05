@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 import { useHead } from "@vueuse/head"
 
 export default defineComponent({
-  setup() {
+  setup: () => {
     useHead({
       title: "Iphone 12 PRO giveaway",
     })

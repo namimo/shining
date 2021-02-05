@@ -5,7 +5,7 @@ import Footer from "./components/Footer.vue"
 
 export default defineComponent({
   components: { Particles, Footer },
-  setup() {},
+  setup: () => {},
 })
 </script>
 

@@ -7,7 +7,7 @@ const props = {
 }
 
 export default defineComponent({
-  setup() {
+  setup: () => {
     onMounted(() => {
       particlesJS.init("particles-js", {
         particles: {

@@ -1,9 +1,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref } from "vue"
-import { useToggle } from "@vueuse/core"
 
 export default defineComponent({
-  setup() {
+  setup: () => {
     const isOpen = ref(false)
 
     const toggle = () => {

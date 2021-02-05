@@ -4,7 +4,7 @@ import Modal from "./Modal.vue"
 
 export default defineComponent({
   components: { Modal },
-  setup() {},
+  setup: () => {},
 })
 </script>
 <template>

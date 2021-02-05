@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref } from "vue"
+import { defineComponent, onMounted, onUnmounted, ref, watch } from "vue"
 
 export default defineComponent({
   setup: () => {
@@ -14,6 +14,13 @@ export default defineComponent({
         toggle()
       }
     }
+
+    watch(isOpen, () => {
+      const body = document.getElementsByTagName("body")[0]
+      if (isOpen && body) {
+        body.style.overflow = isOpen.value ? "hidden" : "auto"
+      }
+    })
 
     onMounted(() => {
       window.addEventListener("keyup", escEvent)
@@ -58,9 +65,18 @@ export default defineComponent({
             leave-to-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
           >
             <div
-              class="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-4"
+              class="relative z-30 inline-block p-4 text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
               v-if="isOpen"
             >
+              <div class="absolute top-0 right-0 sm:m-3">
+                <button
+                  class="p-1.5 text-black rounded-full sm:p-2 focus:outline-none"
+                  @click="toggle"
+                >
+                  <span class="sr-only">Close</span>
+                  <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
+                </button>
+              </div>
               <slot name="body" />
             </div>
           </transition>

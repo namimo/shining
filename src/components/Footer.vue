@@ -55,16 +55,16 @@ export default defineComponent({
       <div class="inline-flex mt-2 space-x-4 underline">
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">Disclamer</button>
+            <button class="focus:outline-none" @click="toggle">Privacy & Policy</button>
           </template>
           <template #body>
-            <h2 class="text-3xl text-gray-900 uppercase sm:text-4xl">Privacy & Policy</h2>
+            <h2 class="text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
             <hr class="my-4" />
             <div class="flex flex-col space-y-6">
-              <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p.title">
-                <h3 class="text-2xl font-semibold text-gray-800">{{ p.title }}</h3>
+              <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p?.title">
+                <h3 class="text-2xl font-semibold text-gray-700">{{ p?.title }}</h3>
                 <p class="leading-relaxed text-gray-600">
-                  {{ p.content }}
+                  {{ p?.content }}
                 </p>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default defineComponent({
         </Modal>
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">About</button>
+            <button class="focus:outline-none" @click="toggle">Prizes</button>
           </template>
           <template #body>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
@@ -86,7 +86,7 @@ export default defineComponent({
         </Modal>
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">Terms & Policy</button>
+            <button class="focus:outline-none" @click="toggle">Terms & Condition</button>
           </template>
           <template #body>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est

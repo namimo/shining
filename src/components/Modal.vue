@@ -17,7 +17,7 @@ export default defineComponent({
 
     watch(isOpen, () => {
       const body = document.getElementsByTagName("body")[0]
-      if (isOpen && body) {
+      if (body) {
         body.style.overflow = isOpen.value ? "hidden" : "auto"
       }
     })

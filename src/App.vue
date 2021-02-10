@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from "vue"
-import Particles from "./components/Particles"
+import Particles from "./components/Particles.vue"
 import Footer from "./components/Footer.vue"
 
 export default defineComponent({
@@ -10,9 +10,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <Particles />
-  <main class="relative max-w-xl px-4 mx-auto my-8 sm:my-12 lg:my-16">
-    <router-view />
-  </main>
-  <Footer />
+  <div class="flex flex-col min-h-screen">
+    <Particles />
+    <main class="relative flex-grow max-w-xl px-4 py-8 mx-auto sm:py-12 lg:py-16">
+      <router-view />
+    </main>
+    <Footer class="flex-shrink-0" />
+  </div>
 </template>

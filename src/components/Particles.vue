@@ -1,10 +1,6 @@
-import { defineComponent, onMounted, h } from "vue"
+<script lang="js">
+import { defineComponent, onMounted } from "vue"
 import particlesJS from "particles.js-es"
-
-const props = {
-  id: "particles-js",
-  class: "absolute inset-0 w-full h-full",
-}
 
 export default defineComponent({
   setup: () => {
@@ -60,6 +56,11 @@ export default defineComponent({
       })
     })
 
-    return () => h("div", props)
+    return {}
   },
 })
+</script>
+
+<template>
+  <div id="particles-js" class="absolute inset-0 w-full h-full" />
+</template>

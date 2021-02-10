@@ -1,14 +1,235 @@
 <script lang="ts">
-import { defineComponent } from "vue"
+import { defineComponent, ref, watch } from "vue"
 import { useHead } from "@vueuse/head"
+// import { load } from "recaptcha-v3"
+import {
+  Listbox,
+  ListboxLabel,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue"
+import Button from "../components/Button.vue"
+
+// const SITE_KEY = "6LfolFIaAAAAALI5KKTwbtgX19RTodAZKrY8dwKf"
+const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
 export default defineComponent({
+  components: { Button, Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption },
   setup: () => {
     useHead({
       title: "Giveaway Sign up",
     })
+
+    const name = ref("suman")
+    const email = ref("s@g.co")
+    const country = ref("Nepal")
+    const isTermsAndConditionsAccepted = ref(false)
+    const receiveEmail = ref(false)
+    const canCompleteCaptcha = ref(false)
+    const completedCaptcha = ref(true)
+    const error = ref("")
+
+    const onSubmit = async () => {
+      // const reCaptcha = await load(SITE_KEY)
+      // const token = await reCaptcha.execute("submit")
+      // console.log(token)
+      error.value = ""
+      if (!name.value || !email.value || !country.value) {
+        error.value = "Please fill out the form"
+        return
+      }
+
+      if (!emailRegex.test(email.value)) {
+        error.value = "Not a valid email!"
+        return
+      }
+
+      if (!isTermsAndConditionsAccepted.value) {
+        error.value = "Accept terms and conditions to continue"
+        return
+      }
+
+      console.log("ssss")
+    }
+
+    watch(isTermsAndConditionsAccepted, () => {
+      canCompleteCaptcha.value = isTermsAndConditionsAccepted.value
+      if (error.value === "Accept terms and conditions to continue") {
+        error.value = ""
+      }
+    })
+
+    return {
+      name,
+      email,
+      COUNTRIES,
+      country,
+      isTermsAndConditionsAccepted,
+      receiveEmail,
+      canCompleteCaptcha,
+      completedCaptcha,
+      error,
+      onSubmit,
+    }
   },
 })
 </script>
 
-<template>Give</template>
+<template>
+  <div id="bg"></div>
+  <div id="bg-c"></div>
+  <div
+    class="relative p-6 my-12 text-center text-white bg-coolGray-900 rounded-xl"
+    style="box-shadow: 0 10px 15px 0 rgb(0 0 0 / 40%)"
+  >
+    <div class="mx-auto my-6 overflow-hidden border-4 rounded-full border-coolGray-700 w-60 h-60">
+      <picture>
+        <source srcset="../assets/iphone.webp" type="image/webp" />
+        <img src="../assets/iphone.png" alt="iphone-stack" />
+      </picture>
+    </div>
+    <h1 class="text-4xl leading-relaxed my-7">
+      Iphone 12 Pro Worth <span class="mr-2 text-5xl text-lightBlue-500">$1200</span>
+      <span class="text-xl text-gray-400">USD</span>
+    </h1>
+    <form class="flex flex-col my-6" @submit.prevent="onSubmit">
+      <p class="mb-5 text-3xl font-semibold tracking-wider uppercase">Enter for a Chance to Win!</p>
+      <div class="space-y-6">
+        <label class="block text-left">
+          <span class="block font-medium">Name</span>
+          <div class="mt-2">
+            <input type="text" class="w-full text-black rounded-lg" v-model="name" />
+          </div>
+        </label>
+        <label class="block text-left">
+          <span class="block font-medium">Email</span>
+          <div class="mt-2">
+            <input type="email" class="w-full text-black rounded-lg" v-model="email" />
+          </div>
+        </label>
+        <Listbox as="div" class="relative text-left" v-model="country">
+          <ListboxLabel class="block font-medium">Country</ListboxLabel>
+          <ListboxButton
+            class="w-full px-3 py-2 mt-2 leading-normal text-left text-black bg-white border rounded-lg"
+            >{{ country }}</ListboxButton
+          >
+          <ListboxOptions
+            as="div"
+            class="absolute w-full mt-1.5 text-black bg-white rounded-lg overflow-hidden focus:outline-none"
+          >
+            <ListboxOption
+              as="div"
+              v-for="COUNTRY in COUNTRIES"
+              :key="COUNTRY"
+              :value="COUNTRY"
+              v-slot="{ selected, active }"
+            >
+              <div
+                :class="`${
+                  active ? 'text-white bg-lightBlue-500' : 'text-gray-900'
+                } cursor-default select-none relative py-2 pl-8 pr-4`"
+              >
+                <span :class="`${selected ? 'font-semibold' : 'font-normal'} block truncate`">
+                  {{ COUNTRY }}
+                </span>
+                <span
+                  v-if="selected"
+                  :class="`${
+                    active ? 'text-white' : 'text-lightBlue-500'
+                  } absolute inset-y-0 left-0 flex items-center pl-1.5`"
+                >
+                  <svg
+                    class="w-5 h-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </ListboxOption>
+          </ListboxOptions>
+        </Listbox>
+        <label class="flex items-center text-left">
+          <input type="checkbox" class="mr-3 rounded" v-model="isTermsAndConditionsAccepted" />
+          <span class="text-sm font-medium">Yes, I agree to the terms and conditions</span>
+        </label>
+        <label class="flex items-center text-left">
+          <input type="checkbox" class="mr-3 rounded" v-model="receiveEmail" />
+          <span class="text-sm font-medium"
+            >Yes, I want to receive occasional emails from userrevu.</span
+          >
+        </label>
+      </div>
+
+      <div class="w-48 h-20 mx-auto my-8 bg-white g-recaptcha">
+        {{ canCompleteCaptcha ? "do captcha" : "accept terms" }}
+      </div>
+
+      <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
+      <Button
+        type="submit"
+        :class="!completedCaptcha && `cursor-not-allowed`"
+        :disabled="!completedCaptcha"
+      >
+        Enter Now
+      </Button>
+      <!-- <Button> Next <fa-solid-arrow-right class="w-6 h-6 ml-4" /> </Button> -->
+    </form>
+  </div>
+</template>
+
+<style>
+#bg {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  z-index: -20;
+  background: url("https://www.apple.com/v/iphone/home/au/images/overview/why-iphone/ios14__dlqyobhcmbau_large.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 bottom;
+}
+#bg:after {
+  height: 70%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: "";
+  display: block;
+  /* background: linear-gradient(
+    to bottom,
+    rgba(21, 21, 30, 0) 0%,
+    rgba(21, 21, 30, 1) 56%,
+    rgba(21, 21, 30, 1) 98%
+  ); */
+  background: linear-gradient(
+    0deg,
+    rgba(17, 24, 39, 1) 0%,
+    rgba(17, 24, 39, 1) 50%,
+    rgba(17, 24, 39, 0.9) 55%,
+    rgba(17, 24, 39, 0.8) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+#bg-c {
+  height: 55%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: block;
+  @apply bg-coolGray-900;
+}
+</style>

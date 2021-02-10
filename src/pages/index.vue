@@ -2,8 +2,11 @@
 import { defineComponent } from "vue"
 import { useRouter } from "vue-router"
 import { useHead } from "@vueuse/head"
+import Timer from "../components/Timer.vue"
+import Button from "../components/Button.vue"
 
 export default defineComponent({
+  components: { Timer, Button },
   setup: () => {
     useHead({
       title: "Iphone 12 PRO giveaway",
@@ -27,16 +30,15 @@ export default defineComponent({
         <span class="text-white">AWAY</span>
       </span>
     </h1>
-    <picture>
-      <source srcset="../assets/iphone.webp" type="image/webp" />
-      <source srcset="../assets/iphone.png" type="image/png" />
-      <img src="../assets/iphone.png" alt="iphone-stack" class="my-12 scale-up-center" />
-    </picture>
-    <button
-      class="px-8 py-2.5 text-lg tracking-wide rounded-full bg-gradient-to-br from-lightBlue-500 to-gray-700 font-semi-bold lg:text-3xl focus:outline-none"
-      @click="router.push(`/giveaway`)"
-    >
+    <div class="relative my-12">
+      <picture>
+        <source srcset="../assets/iphone.webp" type="image/webp" />
+        <img src="../assets/iphone.png" alt="iphone-stack" class="scale-up-center" />
+      </picture>
+      <Timer />
+    </div>
+    <Button @click="router.push(`/giveaway`)">
       <span class="text-white"> PARTICIPATE NOW </span>
-    </button>
+    </Button>
   </div>
 </template>

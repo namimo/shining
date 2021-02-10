@@ -1,10 +1,11 @@
 import "./index.css"
+import "./tailwind.css"
 import { ViteSSG } from "vite-ssg"
 // import { createApp } from "vue"
 import App from "./App.vue"
 
 // import { createRouter, createWebHistory } from "vue-router"
-import routes from "vite-plugin-pages/client"
+import routes from "pages-generated"
 
 // const router = createRouter({
 //   history: createWebHistory(),

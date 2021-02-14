@@ -3,7 +3,6 @@ dependencies:
   '@vueuse/core': 4.1.0_vue@3.0.5
   '@vueuse/head': 0.2.3_vue@3.0.5
   particles.js-es: 1.0.7
-  recaptcha-v3: 1.8.0
   vue: 3.0.5
   vue-router: 4.0.3_vue@3.0.5
 devDependencies:
@@ -2223,10 +2222,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
-  /recaptcha-v3/1.8.0:
-    dev: false
-    resolution:
-      integrity: sha512-ugtg4JHDZiYJwv3ZjWBBZntsTCVpRk2BD8AhVVpSw9jv71SSx+SS9H342VaE0D2XV78DpRdDuiMO9ZIgl4zI3A==
   /reduce-css-calc/2.1.8:
     dependencies:
       css-unit-converter: 1.1.2
@@ -2978,7 +2973,6 @@ specifiers:
   particles.js-es: ^1.0.7
   pnpm: ^5.17.1
   postcss: ^8.2.5
-  recaptcha-v3: ^1.8.0
   tailwindcss: ^2.0.3
   typescript: ^4.1.4
   vite: 2.0.0-beta.67

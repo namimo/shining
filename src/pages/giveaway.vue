@@ -1,7 +1,6 @@
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, onMounted, ref } from "vue"
 import { useHead } from "@vueuse/head"
-// import { load } from "recaptcha-v3"
 import {
   Listbox,
   ListboxLabel,
@@ -10,7 +9,7 @@ import {
   ListboxOption,
 } from "@headlessui/vue"
 
-// const SITE_KEY = "6LfolFIaAAAAALI5KKTwbtgX19RTodAZKrY8dwKf"
+const SITE_KEY = "6LdK6lcaAAAAAN5X446f0lp2RbULquLINb5S7Gz2"
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
@@ -20,20 +19,21 @@ export default defineComponent({
     useHead({
       title: "Giveaway Sign up",
     })
+    const step = ref<"form" | "final">("form")
 
     const name = ref("suman")
     const email = ref("s@g.co")
     const country = ref("Nepal")
     const isTermsAndConditionsAccepted = ref(false)
     const receiveEmail = ref(false)
-    const canCompleteCaptcha = ref(false)
-    const completedCaptcha = ref(true)
+    const completedCaptcha = ref(false)
     const error = ref("")
 
+    const captchaCallback = (token: string) => {
+      completedCaptcha.value = token ? true : false
+    }
+
     const onSubmit = async () => {
-      // const reCaptcha = await load(SITE_KEY)
-      // const token = await reCaptcha.execute("submit")
-      // console.log(token)
       error.value = ""
       if (!name.value || !email.value || !country.value) {
         error.value = "Please fill out the form"
@@ -50,24 +50,24 @@ export default defineComponent({
         return
       }
 
-      console.log("ssss")
+      step.value = "final"
     }
 
-    watch(isTermsAndConditionsAccepted, () => {
-      canCompleteCaptcha.value = isTermsAndConditionsAccepted.value
-      if (error.value === "Accept terms and conditions to continue") {
-        error.value = ""
-      }
+    onMounted(() => {
+      grecaptcha.render("g-recaptcha", {
+        sitekey: SITE_KEY,
+        callback: captchaCallback,
+      })
     })
 
     return {
+      step,
       name,
       email,
       COUNTRIES,
       country,
       isTermsAndConditionsAccepted,
       receiveEmail,
-      canCompleteCaptcha,
       completedCaptcha,
       error,
       onSubmit,
@@ -89,100 +89,105 @@ export default defineComponent({
         <img src="../assets/iphone.png" alt="iphone-stack" />
       </picture>
     </div>
-    <h1 class="text-4xl leading-relaxed my-7">
-      Iphone 12 Pro Worth <span class="mr-2 text-5xl text-lightBlue-500">$1200</span>
-      <span class="text-xl text-gray-400">USD</span>
-    </h1>
-    <form class="flex flex-col my-6" @submit.prevent="onSubmit">
-      <p class="mb-5 text-3xl font-semibold tracking-wider uppercase">Enter for a Chance to Win!</p>
-      <div class="space-y-6">
-        <label class="block text-left">
-          <span class="block font-medium">Name</span>
-          <div class="mt-2">
-            <input type="text" class="w-full text-black rounded-lg" v-model="name" />
-          </div>
-        </label>
-        <label class="block text-left">
-          <span class="block font-medium">Email</span>
-          <div class="mt-2">
-            <input type="email" class="w-full text-black rounded-lg" v-model="email" />
-          </div>
-        </label>
-        <Listbox as="div" class="relative text-left" v-model="country">
-          <ListboxLabel class="block font-medium">Country</ListboxLabel>
-          <ListboxButton
-            class="w-full px-3 py-2 mt-2 leading-normal text-left text-black bg-white border rounded-lg"
-            >{{ country }}</ListboxButton
-          >
-          <ListboxOptions
-            as="div"
-            class="absolute w-full mt-1.5 text-black bg-white rounded-lg overflow-hidden focus:outline-none"
-          >
-            <ListboxOption
-              as="div"
-              v-for="COUNTRY in COUNTRIES"
-              :key="COUNTRY"
-              :value="COUNTRY"
-              v-slot="{ selected, active }"
+    <template v-if="step === 'form'">
+      <h1 class="text-4xl leading-relaxed my-7">
+        Iphone 12 Pro Worth <span class="mr-2 text-5xl text-lightBlue-500">$1200</span>
+        <span class="text-xl text-gray-400">USD</span>
+      </h1>
+      <form class="flex flex-col my-6" @submit.prevent="onSubmit">
+        <p class="mb-5 text-3xl font-semibold tracking-wider uppercase">
+          Enter for a Chance to Win!
+        </p>
+        <div class="space-y-6">
+          <label class="block text-left">
+            <span class="block font-medium">Name</span>
+            <div class="mt-2">
+              <input type="text" class="w-full text-black rounded-lg" v-model="name" />
+            </div>
+          </label>
+          <label class="block text-left">
+            <span class="block font-medium">Email</span>
+            <div class="mt-2">
+              <input type="email" class="w-full text-black rounded-lg" v-model="email" />
+            </div>
+          </label>
+          <Listbox as="div" class="relative text-left" v-model="country">
+            <ListboxLabel class="block font-medium">Country</ListboxLabel>
+            <ListboxButton
+              class="w-full px-3 py-2 mt-2 leading-normal text-left text-black bg-white border rounded-lg"
+              >{{ country }}</ListboxButton
             >
-              <div
-                :class="`${
-                  active ? 'text-white bg-lightBlue-500' : 'text-gray-900'
-                } cursor-default select-none relative py-2 pl-8 pr-4`"
+            <ListboxOptions
+              as="div"
+              class="absolute w-full mt-1.5 text-black bg-white rounded-lg overflow-hidden focus:outline-none"
+            >
+              <ListboxOption
+                as="div"
+                v-for="COUNTRY in COUNTRIES"
+                :key="COUNTRY"
+                :value="COUNTRY"
+                v-slot="{ selected, active }"
               >
-                <span :class="`${selected ? 'font-semibold' : 'font-normal'} block truncate`">
-                  {{ COUNTRY }}
-                </span>
-                <span
-                  v-if="selected"
+                <div
                   :class="`${
-                    active ? 'text-white' : 'text-lightBlue-500'
-                  } absolute inset-y-0 left-0 flex items-center pl-1.5`"
+                    active ? 'text-white bg-lightBlue-500' : 'text-gray-900'
+                  } cursor-default select-none relative py-2 pl-8 pr-4`"
                 >
-                  <svg
-                    class="w-5 h-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
+                  <span :class="`${selected ? 'font-semibold' : 'font-normal'} block truncate`">
+                    {{ COUNTRY }}
+                  </span>
+                  <span
+                    v-if="selected"
+                    :class="`${
+                      active ? 'text-white' : 'text-lightBlue-500'
+                    } absolute inset-y-0 left-0 flex items-center pl-1.5`"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </ListboxOption>
-          </ListboxOptions>
-        </Listbox>
-        <label class="flex items-center text-left">
-          <input type="checkbox" class="mr-3 rounded" v-model="isTermsAndConditionsAccepted" />
-          <span class="text-sm font-medium">Yes, I agree to the terms and conditions</span>
-        </label>
-        <label class="flex items-center text-left">
-          <input type="checkbox" class="mr-3 rounded" v-model="receiveEmail" />
-          <span class="text-sm font-medium"
-            >Yes, I want to receive occasional emails from userrevu.</span
-          >
-        </label>
-      </div>
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </ListboxOption>
+            </ListboxOptions>
+          </Listbox>
+          <label class="flex items-center text-left">
+            <input type="checkbox" class="mr-3 rounded" v-model="isTermsAndConditionsAccepted" />
+            <span class="text-sm font-medium">Yes, I agree to the terms and conditions</span>
+          </label>
+          <label class="flex items-center text-left">
+            <input type="checkbox" class="mr-3 rounded" v-model="receiveEmail" />
+            <span class="text-sm font-medium"
+              >Yes, I want to receive occasional emails from userrevu.</span
+            >
+          </label>
+        </div>
 
-      <div class="w-48 h-20 mx-auto my-8 bg-white g-recaptcha">
-        {{ canCompleteCaptcha ? "do captcha" : "accept terms" }}
-      </div>
+        <div id="g-recaptcha" class="mx-auto my-8" />
 
-      <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
-      <button
-        type="submit"
-        class="button-primary"
-        :class="!completedCaptcha && `cursor-not-allowed`"
-        :disabled="!completedCaptcha"
-      >
-        Enter Now
-      </button>
-      <!-- <Button> Next <fa-solid-arrow-right class="w-6 h-6 ml-4" /> </Button> -->
-    </form>
+        <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
+        <button
+          type="submit"
+          class="button-primary"
+          :class="!completedCaptcha && `cursor-not-allowed`"
+          :disabled="!completedCaptcha"
+        >
+          Enter Now
+        </button>
+        <!-- <Button> Next <fa-solid-arrow-right class="w-6 h-6 ml-4" /> </Button> -->
+      </form>
+    </template>
+    <template v-if="step === 'final'">
+      <p>The Lorem ipsum dolor sit.</p>
+    </template>
   </div>
 </template>
 

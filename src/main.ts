@@ -16,4 +16,13 @@ import routes from "pages-generated"
 // app.use(router)
 // app.mount("#app")
 
-export const createApp = ViteSSG(App, { routes }, (_ctx) => {})
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    scrollBehavior: () => {
+      return { top: 0 }
+    },
+  },
+  (_ctx) => {},
+)

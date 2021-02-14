@@ -1,11 +1,9 @@
 <template>
   <div class="absolute inset-0 w-full h-full">
     <div class="flex items-center justify-center w-full h-full">
-      <div
-        class="px-3 py-4 rounded-lg shadow-xl sm:py-5 w-44 sm:w-auto md:px-6 bg-gradient-to-b to-coolGray-900 from-red-600"
-      >
+      <div class="p-6 rounded-lg shadow-xl bg-gradient-to-b to-coolGray-900 from-red-600">
         <div
-          class="px-2 py-3 mx-auto -mt-8 text-lg tracking-widest text-center uppercase bg-red-600 rounded-lg shadow-md sm:text-xl sm:px-8 max-w-max"
+          class="px-6 py-3 mx-auto -mt-10 text-lg tracking-widest text-center uppercase bg-red-600 rounded-lg shadow-md sm:text-xl max-w-max"
         >
           Expires On
         </div>

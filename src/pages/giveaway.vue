@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue"
+import { defineComponent, ref } from "vue"
 import { useHead } from "@vueuse/head"
 import {
   Listbox,
@@ -8,13 +8,14 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue"
+import Recaptcha from "../components/Recaptcha.vue"
 
 const SITE_KEY = "6LdK6lcaAAAAAN5X446f0lp2RbULquLINb5S7Gz2"
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
 export default defineComponent({
-  components: { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption },
+  components: { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption, Recaptcha },
   setup: () => {
     useHead({
       title: "Giveaway Sign up",
@@ -53,13 +54,6 @@ export default defineComponent({
       step.value = "final"
     }
 
-    onMounted(() => {
-      grecaptcha.render("g-recaptcha", {
-        sitekey: SITE_KEY,
-        callback: captchaCallback,
-      })
-    })
-
     return {
       step,
       name,
@@ -69,6 +63,8 @@ export default defineComponent({
       isTermsAndConditionsAccepted,
       receiveEmail,
       completedCaptcha,
+      SITE_KEY,
+      captchaCallback,
       error,
       onSubmit,
     }
@@ -171,7 +167,7 @@ export default defineComponent({
           </label>
         </div>
 
-        <div id="g-recaptcha" class="mx-auto my-8" />
+        <Recaptcha class="mx-auto my-8" :sitekey="SITE_KEY" @callback="captchaCallback" />
 
         <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
         <button

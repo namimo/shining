@@ -9,14 +9,13 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue"
-import Button from "../components/Button.vue"
 
 // const SITE_KEY = "6LfolFIaAAAAALI5KKTwbtgX19RTodAZKrY8dwKf"
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
 export default defineComponent({
-  components: { Button, Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption },
+  components: { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption },
   setup: () => {
     useHead({
       title: "Giveaway Sign up",
@@ -174,13 +173,14 @@ export default defineComponent({
       </div>
 
       <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
-      <Button
+      <button
         type="submit"
+        class="button-primary"
         :class="!completedCaptcha && `cursor-not-allowed`"
         :disabled="!completedCaptcha"
       >
         Enter Now
-      </Button>
+      </button>
       <!-- <Button> Next <fa-solid-arrow-right class="w-6 h-6 ml-4" /> </Button> -->
     </form>
   </div>

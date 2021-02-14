@@ -57,41 +57,38 @@ export default defineComponent({
           <template #button="{ toggle }">
             <button class="focus:outline-none" @click="toggle">Privacy & Policy</button>
           </template>
-          <template #body>
-            <h2 class="text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
-            <hr class="my-4" />
-            <div class="flex flex-col space-y-6">
-              <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p?.title">
-                <h3 class="text-2xl font-semibold text-gray-700">{{ p?.title }}</h3>
-                <p class="leading-relaxed text-gray-600">
-                  {{ p?.content }}
-                </p>
-              </div>
-            </div>
 
-            <p class="mt-10 text-sm text-gray-400">
-              If you have any questions or concerns, please contact us via the email address
-              provided below.
-            </p>
-          </template>
+          <h2 class="text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
+          <hr class="my-4" />
+          <div class="flex flex-col space-y-6">
+            <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p?.title">
+              <h3 class="text-2xl font-semibold text-gray-700">{{ p?.title }}</h3>
+              <p class="leading-relaxed text-gray-600">
+                {{ p?.content }}
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-10 text-sm text-gray-400">
+            If you have any questions or concerns, please contact us via the email address provided
+            below.
+          </p>
         </Modal>
         <Modal>
           <template #button="{ toggle }">
             <button class="focus:outline-none" @click="toggle">Prizes</button>
           </template>
-          <template #body>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
-            assumenda enim facilis quos. Ut, voluptas.
-          </template>
+
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
+          assumenda enim facilis quos. Ut, voluptas.
         </Modal>
         <Modal>
           <template #button="{ toggle }">
             <button class="focus:outline-none" @click="toggle">Terms & Condition</button>
           </template>
-          <template #body>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
-            assumenda enim facilis quos. Ut, voluptas.
-          </template>
+
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
+          assumenda enim facilis quos. Ut, voluptas.
         </Modal>
       </div>
     </div>

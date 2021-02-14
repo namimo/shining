@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, watch } from "vue"
+import { defineComponent, ref, watch } from "vue"
 
 export default defineComponent({
   setup: () => {
@@ -9,24 +9,11 @@ export default defineComponent({
       isOpen.value = !isOpen.value
     }
 
-    const escEvent = (e: KeyboardEvent) => {
-      if (isOpen.value && e.key === "Escape") {
-        toggle()
-      }
-    }
-
     watch(isOpen, () => {
       const body = document.getElementsByTagName("body")[0]
       if (body) {
         body.style.overflow = isOpen.value ? "hidden" : "auto"
       }
-    })
-
-    onMounted(() => {
-      window.addEventListener("keyup", escEvent)
-    })
-    onUnmounted(() => {
-      window.removeEventListener("keydown", escEvent)
     })
 
     return { isOpen, toggle }
@@ -54,7 +41,6 @@ export default defineComponent({
               <div class="absolute inset-0 bg-gray-900 opacity-50" @click="toggle"></div>
             </div>
           </transition>
-          <!-- This element is to trick the browser into centering the modal contents. -->
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
           <transition
             enter-active-class="duration-300 ease-out"
@@ -74,7 +60,7 @@ export default defineComponent({
                   <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
                 </button>
               </div>
-              <slot name="body" />
+              <slot />
             </div>
           </transition>
         </div>

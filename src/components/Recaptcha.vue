@@ -1,5 +1,12 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue"
+import { useScriptTag } from "@vueuse/core"
+
+declare global {
+  interface Window {
+    renderCaptcha: () => void
+  }
+}
 
 export default defineComponent({
   props: {
@@ -8,40 +15,35 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ["callback"],
+  emits: ["callback", "errorCallback"],
   setup(props, { emit }) {
-    const renderRecaptcha = () => {
-      grecaptcha.render("g-recaptcha", {
-        sitekey: props.sitekey,
-        callback: (token: string) => {
-          emit("callback", token)
-        },
-      })
-    }
-
-    onMounted(() => {
-      if (window.grecaptcha === null) {
-        new Promise((resolve) => {
-          window.recaptchaReady = function () {
-            resolve()
-          }
-
-          const doc = window.document
-          const scriptId = "recaptcha-script"
-          const scriptTag = doc.createElement("script")
-          scriptTag.id = scriptId
-          scriptTag.setAttribute(
-            "src",
-            "https://www.google.com/recaptcha/api.js?onload=recaptchaReady&render=explicit",
-          )
-          doc.head.appendChild(scriptTag)
-        }).then(() => {
-          renderRecaptcha()
-        })
-      } else {
-        renderRecaptcha()
+    onMounted(async () => {
+      try {
+        window.renderCaptcha = () => {
+          window.grecaptcha.render("g-recaptcha", {
+            sitekey: props.sitekey,
+            callback: (token: string) => {
+              emit("callback", token)
+            },
+            "error-callback": () => {
+              emit("errorCallback")
+            },
+          })
+        }
+        const {
+          load,
+        } = useScriptTag(
+          "https://www.google.com/recaptcha/api.js?onload=renderCaptcha&render=explicit",
+          (_el) => {},
+          { async: true, defer: true, manual: true },
+        )
+        await load()
+      } catch (error) {
+        emit("errorCallback")
       }
     })
+
+    return {}
   },
 })
 </script>

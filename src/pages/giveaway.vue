@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import { useHead } from "@vueuse/head"
+import InputBase from "../components/InputBase.vue"
 import {
   Listbox,
   ListboxLabel,
@@ -15,7 +16,15 @@ const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\
 const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
 export default defineComponent({
-  components: { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption, Recaptcha },
+  components: {
+    InputBase,
+    Listbox,
+    ListboxLabel,
+    ListboxButton,
+    ListboxOptions,
+    ListboxOption,
+    Recaptcha,
+  },
   setup: () => {
     useHead({
       title: "Giveaway Sign up",
@@ -92,25 +101,15 @@ export default defineComponent({
     <template v-if="step === 'form'">
       <h1 class="text-4xl leading-relaxed my-7">
         Iphone 12 Pro Worth <span class="mr-2 text-5xl text-lightBlue-500">$1200</span>
-        <span class="text-xl text-gray-400">USD</span>
+        <span class="text-xl">USD</span>
       </h1>
       <form class="flex flex-col my-6" @submit.prevent="onSubmit">
         <p class="mb-5 text-3xl font-semibold tracking-wider uppercase">
           Enter for a Chance to Win!
         </p>
         <div class="space-y-6">
-          <label class="block text-left">
-            <span class="block font-medium">Name</span>
-            <div class="mt-2">
-              <input type="text" class="w-full text-black rounded-lg" v-model="name" />
-            </div>
-          </label>
-          <label class="block text-left">
-            <span class="block font-medium">Email</span>
-            <div class="mt-2">
-              <input type="email" class="w-full text-black rounded-lg" v-model="email" />
-            </div>
-          </label>
+          <InputBase label="Name" v-model="name" />
+          <InputBase label="Email" v-model="email" />
           <Listbox as="div" class="relative text-left" v-model="country">
             <ListboxLabel class="block font-medium">Country</ListboxLabel>
             <ListboxButton

@@ -129,18 +129,16 @@ export default defineComponent({
                 v-slot="{ selected, active }"
               >
                 <div
-                  :class="`${
-                    active ? 'text-white bg-lightBlue-500' : 'text-gray-900'
-                  } cursor-default select-none relative py-2 pl-8 pr-4`"
+                  class="relative py-2 pl-8 pr-4 cursor-default select-none"
+                  :class="active ? `text-white bg-lightBlue-500` : `text-gray-900`"
                 >
-                  <span :class="`${selected ? 'font-semibold' : 'font-normal'} block truncate`">
+                  <span class="block truncate" :class="selected ? `font-semibold` : `font-normal`">
                     {{ COUNTRY }}
                   </span>
                   <span
+                    class="absolute inset-y-0 left-0 flex items-center pl-1.5"
+                    :class="active ? `text-white` : `text-lightBlue-500`"
                     v-if="selected"
-                    :class="`${
-                      active ? 'text-white' : 'text-lightBlue-500'
-                    } absolute inset-y-0 left-0 flex items-center pl-1.5`"
                   >
                     <svg
                       class="w-5 h-5"

@@ -58,7 +58,7 @@ export default defineComponent({
             <button class="focus:outline-none" @click="toggle">Privacy & Policy</button>
           </template>
 
-          <h2 class="text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
+          <h2 class="pr-10 text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
           <hr class="my-4" />
           <div class="flex flex-col space-y-6">
             <div class="space-y-2" v-for="p in footerInfo['privacy&Polices']" :key="p?.title">

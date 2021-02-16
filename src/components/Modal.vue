@@ -54,7 +54,7 @@ export default defineComponent({
               class="relative z-30 inline-block p-4 text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
               v-if="isOpen"
             >
-              <div class="absolute top-0 right-0 m-3">
+              <div class="absolute top-0 right-0 m-3.5 sm:m-5">
                 <button class="p-2 text-black rounded-full focus:outline-none" @click="toggle">
                   <span class="sr-only">Close</span>
                   <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />

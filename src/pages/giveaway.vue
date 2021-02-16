@@ -22,8 +22,8 @@ export default defineComponent({
     })
     const step = ref<"form" | "final">("form")
 
-    const name = ref("suman")
-    const email = ref("s@g.co")
+    const name = ref("")
+    const email = ref("")
     const country = ref("Nepal")
     const isTermsAndConditionsAccepted = ref(false)
     const receiveEmail = ref(false)
@@ -187,7 +187,6 @@ export default defineComponent({
         >
           Enter Now
         </button>
-        <!-- <Button> Next <fa-solid-arrow-right class="w-6 h-6 ml-4" /> </Button> -->
       </form>
     </template>
     <template v-if="step === 'final'">
@@ -217,12 +216,6 @@ export default defineComponent({
   left: 0;
   content: "";
   display: block;
-  /* background: linear-gradient(
-    to bottom,
-    rgba(21, 21, 30, 0) 0%,
-    rgba(21, 21, 30, 1) 56%,
-    rgba(21, 21, 30, 1) 98%
-  ); */
   background: linear-gradient(
     0deg,
     rgba(17, 24, 39, 1) 0%,

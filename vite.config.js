@@ -3,6 +3,7 @@ import Legacy from "@vitejs/plugin-legacy"
 import Pages from "vite-plugin-pages"
 import ViteComponents from "vite-plugin-components"
 import ViteIcons, { ViteIconsResolver } from "vite-plugin-icons"
+import WindiCSS from "vite-plugin-windicss"
 
 /**
  * @type {import("vite").UserConfig}
@@ -25,10 +26,16 @@ const config = {
       // scale: '1.2',
       defaultStyle: "",
     }),
+    ...WindiCSS({}),
   ],
+  ssgOptions: {
+    script: "async",
+    formatting: "minify",
+  },
+  optimizeDeps: {
+    include: ["vue", "vue-router", "@vueuse/core", "@vueuse/head", "@headlessui/vue"],
+    exclude: ["vue-demi"],
+  },
 }
 
 export default config
-
-// Considering only vue files in this pr: https://github.com/vuejs/vitepress/pull/137, net 221 loc were removed from 12 files.
-// Less boilerplate, no need to register components, code doesn't start from 2nd level of indentation and you only write and see what you need.

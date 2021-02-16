@@ -1,5 +1,5 @@
+import "windi.css"
 import "./index.css"
-import "./tailwind.css"
 import { ViteSSG } from "vite-ssg"
 // import { createApp } from "vue"
 import App from "./App.vue"

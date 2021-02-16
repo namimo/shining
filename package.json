@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "cross-env NODE_ENV=production vite-ssg build --script async",
+    "build": "cross-env NODE_ENV=production vite-ssg build",
     "build:type-check": "vuedx-typecheck . && yarn build"
   },
   "dependencies": {
@@ -25,16 +25,16 @@
     "@vue/server-renderer": "^3.0.5",
     "@vuedx/typecheck": "^0.6.3",
     "@vuedx/typescript-plugin-vue": "^0.6.3",
-    "autoprefixer": "^10.2.4",
     "cross-env": "^7.0.3",
     "pnpm": "^5.17.2",
     "postcss": "^8.2.6",
-    "tailwindcss": "^2.0.3",
     "typescript": "^4.1.5",
     "vite": "2.0.0-beta.70",
     "vite-plugin-components": "^0.6.10",
     "vite-plugin-icons": "^0.2.1",
     "vite-plugin-pages": "^0.4.2",
-    "vite-ssg": "^0.8.8"
+    "vite-plugin-windicss": "0.1.15",
+    "vite-ssg": "^0.8.8",
+    "windicss": "^2.1.9"
   }
 }

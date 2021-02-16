@@ -1,5 +1,5 @@
-const colors = require("tailwindcss/colors")
-const { theme } = require("tailwindcss/defaultConfig")
+const colors = require("windicss/colors")
+const { theme } = require("windicss/defaultConfig")
 
 module.exports = {
   purge: {
@@ -22,7 +22,7 @@ module.exports = {
   },
   plugins: [
     // ...
-    require("@tailwindcss/forms"),
+    // require("windicss/plugin/forms"),
   ],
   corePlugins: {
     // ...

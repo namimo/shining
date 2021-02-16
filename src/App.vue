@@ -36,4 +36,12 @@ export default defineComponent({
   @apply lg:text-3xl;
   @apply focus:outline-none;
 }
+
+.bg-coolGray-900 {
+  @apply bg-coolGray-900;
+}
+
+.text-lightBlue-500 {
+  @apply text-lightBlue-500;
+}
 </style>

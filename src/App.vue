@@ -41,6 +41,10 @@ export default defineComponent({
   @apply bg-coolGray-900;
 }
 
+.bg-lightBlue-500 {
+  @apply bg-lightBlue-500;
+}
+
 .text-lightBlue-500 {
   @apply text-lightBlue-500;
 }

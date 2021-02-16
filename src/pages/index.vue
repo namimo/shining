@@ -29,7 +29,7 @@ export default defineComponent({
         <img
           src="../assets/iphone.png"
           alt="iphone-stack"
-          class="scale-up-center"
+          :class="isImageLoaded && `scale-up-center`"
           @load="isImageLoaded = true"
         />
       </picture>

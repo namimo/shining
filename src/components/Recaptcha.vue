@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, onMounted } from "vue"
+import { defineComponent, onMounted, ref } from "vue"
 import { useScriptTag } from "@vueuse/core"
 
 declare global {
@@ -17,10 +17,16 @@ export default defineComponent({
   },
   emits: ["callback", "errorCallback"],
   setup(props, { emit }) {
+    const element = ref<HTMLElement | null>(null)
+
     onMounted(async () => {
       try {
         window.renderCaptcha = () => {
-          window.grecaptcha.render("g-recaptcha", {
+          if (!element.value) {
+            emit("errorCallback")
+            return
+          }
+          window.grecaptcha.render(element.value, {
             sitekey: props.sitekey,
             callback: (token: string) => {
               emit("callback", token)
@@ -30,6 +36,12 @@ export default defineComponent({
             },
           })
         }
+
+        if (window.grecaptcha) {
+          window.renderCaptcha()
+          return
+        }
+
         const {
           load,
         } = useScriptTag(
@@ -43,11 +55,11 @@ export default defineComponent({
       }
     })
 
-    return {}
+    return { element }
   },
 })
 </script>
 
 <template>
-  <div id="g-recaptcha" />
+  <div ref="element" />
 </template>

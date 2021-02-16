@@ -33,6 +33,9 @@ export default defineComponent({
     const captchaCallback = (token: string) => {
       completedCaptcha.value = token ? true : false
     }
+    const captchaErrorCallback = () => {
+      error.value = "Failed to load captcha. Refresh page."
+    }
 
     const onSubmit = async () => {
       error.value = ""
@@ -65,6 +68,7 @@ export default defineComponent({
       completedCaptcha,
       SITE_KEY,
       captchaCallback,
+      captchaErrorCallback,
       error,
       onSubmit,
     }
@@ -167,7 +171,12 @@ export default defineComponent({
           </label>
         </div>
 
-        <Recaptcha class="mx-auto my-8" :sitekey="SITE_KEY" @callback="captchaCallback" />
+        <Recaptcha
+          class="mx-auto my-8"
+          :sitekey="SITE_KEY"
+          @callback="captchaCallback"
+          @errorCallback="captchaErrorCallback"
+        />
 
         <p class="mb-2.5 text-sm text-red-600" v-if="error">{{ error }}</p>
         <button

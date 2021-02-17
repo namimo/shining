@@ -18,22 +18,3 @@ export default defineComponent({
     <Footer class="flex-shrink-0" />
   </div>
 </template>
-
-<style lang="postcss">
-.button-primary {
-  @apply inline-flex;
-  @apply items-center;
-  @apply justify-center;
-  @apply px-12;
-  @apply py-3;
-  @apply text-lg;
-  @apply tracking-wide;
-  @apply rounded-full;
-  @apply bg-gradient-to-br;
-  @apply from-lightBlue-500;
-  @apply to-gray-700;
-  @apply font-semibold;
-  @apply lg:text-3xl;
-  @apply focus:outline-none;
-}
-</style>

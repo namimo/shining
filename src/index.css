@@ -1,3 +1,7 @@
+.button-primary {
+  @apply inline-flex items-center justify-center px-12 py-3 text-lg font-semibold tracking-wide rounded-full bg-gradient-to-br from-lightBlue-500 to-gray-700 lg:text-3xl focus:outline-none;
+}
+
 .scale-up-center {
   animation: scale-up-center 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }

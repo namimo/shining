@@ -26,7 +26,11 @@ const config = {
       // scale: '1.2',
       defaultStyle: "",
     }),
-    ...WindiCSS({}),
+    WindiCSS({
+      preflight: {
+        enableAll: true,
+      },
+    }),
   ],
   ssgOptions: {
     script: "async",

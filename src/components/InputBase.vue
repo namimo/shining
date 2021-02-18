@@ -16,7 +16,7 @@ export default defineComponent({
     <div class="mt-2">
       <input
         type="text"
-        class="block w-full px-3 py-2 leading-normal text-black bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        class="block w-full px-3 py-2 leading-normal text-black bg-white border border-gray-300 rounded-lg appearance-none"
         v-bind="$attrs"
         :value="$props.modelValue"
         @input="(e) => $emit('update:modelValue', e.target.value)"

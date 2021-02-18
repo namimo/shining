@@ -55,7 +55,7 @@ export default defineComponent({
       <div class="inline-flex mt-2 space-x-4 underline">
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">Privacy & Policy</button>
+            <button @click="toggle">Privacy & Policy</button>
           </template>
 
           <h2 class="pr-10 text-3xl text-gray-800 uppercase sm:text-4xl">Privacy & Policy</h2>
@@ -76,7 +76,7 @@ export default defineComponent({
         </Modal>
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">Prizes</button>
+            <button @click="toggle">Prizes</button>
           </template>
 
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est
@@ -84,7 +84,7 @@ export default defineComponent({
         </Modal>
         <Modal>
           <template #button="{ toggle }">
-            <button class="focus:outline-none" @click="toggle">Terms & Condition</button>
+            <button @click="toggle">Terms & Condition</button>
           </template>
 
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit esse debitis iste rem est

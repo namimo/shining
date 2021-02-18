@@ -33,7 +33,7 @@ const config = {
     formatting: "minify",
   },
   optimizeDeps: {
-    include: ["vue", "vue-router", "@vueuse/core", "@vueuse/head", "@headlessui/vue"],
+    include: ["vue", "vue-router", "@vueuse/core"],
     exclude: ["vue-demi"],
   },
 }

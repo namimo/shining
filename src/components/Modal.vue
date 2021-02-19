@@ -1,23 +1,17 @@
-<script lang="ts">
-import { defineComponent, ref, watch } from "vue"
+<script setup lang="ts">
+import { ref, watch } from "vue"
 
-export default defineComponent({
-  setup: () => {
-    const isOpen = ref(false)
+const isOpen = ref(false)
 
-    const toggle = () => {
-      isOpen.value = !isOpen.value
-    }
+const toggle = () => {
+  isOpen.value = !isOpen.value
+}
 
-    watch(isOpen, () => {
-      const body = document.getElementsByTagName("body")[0]
-      if (body) {
-        body.style.overflow = isOpen.value ? "hidden" : "auto"
-      }
-    })
-
-    return { isOpen, toggle }
-  },
+watch(isOpen, () => {
+  const body = document.getElementsByTagName("body")[0]
+  if (body) {
+    body.style.overflow = isOpen.value ? "hidden" : "auto"
+  }
 })
 </script>
 

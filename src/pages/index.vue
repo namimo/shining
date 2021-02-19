@@ -1,20 +1,13 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue"
+<script setup lang="ts">
+import { ref } from "vue"
 import { useHead } from "@vueuse/head"
 import Timer from "../components/Timer.vue"
 
-export default defineComponent({
-  components: { Timer },
-  setup: () => {
-    useHead({
-      title: "Iphone 12 PRO giveaway",
-    })
-
-    const isImageLoaded = ref(false)
-
-    return { isImageLoaded }
-  },
+useHead({
+  title: "Iphone 12 PRO giveaway",
 })
+
+const isImageLoaded = ref(false)
 </script>
 
 <template>

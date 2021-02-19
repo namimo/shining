@@ -1,7 +1,6 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue"
+<script setup lang="ts">
+import { ref } from "vue"
 import { useHead } from "@vueuse/head"
-import InputBase from "../components/InputBase.vue"
 import {
   Listbox,
   ListboxLabel,
@@ -9,80 +8,62 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue"
+import InputBase from "../components/InputBase.vue"
 import Recaptcha from "../components/Recaptcha.vue"
 
 const SITE_KEY = "6LdK6lcaAAAAAN5X446f0lp2RbULquLINb5S7Gz2"
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 
-export default defineComponent({
-  components: {
-    InputBase,
-    Listbox,
-    ListboxLabel,
-    ListboxButton,
-    ListboxOptions,
-    ListboxOption,
-    Recaptcha,
-  },
-  setup: () => {
-    useHead({
-      title: "Giveaway Sign up",
-    })
-    const step = ref<"form" | "final">("form")
-
-    const name = ref("")
-    const email = ref("")
-    const country = ref("Nepal")
-    const isTermsAndConditionsAccepted = ref(false)
-    const receiveEmail = ref(false)
-    const completedCaptcha = ref(false)
-    const error = ref("")
-
-    const captchaCallback = (token: string) => {
-      completedCaptcha.value = token ? true : false
-    }
-    const captchaErrorCallback = () => {
-      error.value = "Failed to load captcha. Refresh page."
-    }
-
-    const onSubmit = async () => {
-      error.value = ""
-      if (!name.value || !email.value || !country.value) {
-        error.value = "Please fill out the form"
-        return
-      }
-
-      if (!emailRegex.test(email.value)) {
-        error.value = "Not a valid email!"
-        return
-      }
-
-      if (!isTermsAndConditionsAccepted.value) {
-        error.value = "Accept terms and conditions to continue"
-        return
-      }
-
-      step.value = "final"
-    }
-
-    return {
-      step,
-      name,
-      email,
-      COUNTRIES,
-      country,
-      isTermsAndConditionsAccepted,
-      receiveEmail,
-      completedCaptcha,
-      SITE_KEY,
-      captchaCallback,
-      captchaErrorCallback,
-      error,
-      onSubmit,
-    }
-  },
+useHead({
+  title: "Giveaway Sign up",
 })
+const step = ref<"one" | "two">("two")
+
+const name = ref("")
+const email = ref("")
+const country = ref("Nepal")
+const isTermsAndConditionsAccepted = ref(false)
+const receiveEmail = ref(false)
+const completedCaptcha = ref(false)
+const error = ref("")
+const understandProcess = ref(false)
+
+const captchaCallback = (token: string) => {
+  completedCaptcha.value = token ? true : false
+}
+const captchaErrorCallback = () => {
+  error.value = "Failed to load captcha. Refresh page."
+}
+
+const onSubmitOne = () => {
+  error.value = ""
+  if (!name.value || !email.value || !country.value) {
+    error.value = "Please fill out the form!"
+    return
+  }
+
+  if (!emailRegex.test(email.value)) {
+    error.value = "Not a valid email!"
+    return
+  }
+
+  if (!isTermsAndConditionsAccepted.value) {
+    error.value = "Accept terms and conditions to continue!"
+    return
+  }
+
+  if (!completedCaptcha.value) {
+    error.value = "Verify that you are a human!"
+    return
+  }
+
+  step.value = "two"
+}
+
+const onSubmitTwo = () => {
+  console.log("two")
+}
 </script>
 
 <template>
@@ -92,18 +73,18 @@ export default defineComponent({
     class="relative p-6 my-12 text-center text-white bg-coolGray-900 rounded-xl"
     style="box-shadow: 0 10px 15px 0 rgb(0 0 0 / 40%)"
   >
-    <div class="mx-auto my-6 overflow-hidden border-4 rounded-full border-coolGray-700 w-60 h-60">
+    <div class="mx-auto overflow-hidden border-4 rounded-full my-7 border-coolGray-700 w-60 h-60">
       <picture>
         <source srcset="../assets/iphone.webp" type="image/webp" />
         <img src="../assets/iphone.png" alt="iphone-stack" />
       </picture>
     </div>
-    <template v-if="step === 'form'">
+    <template v-if="step === `one`">
       <h1 class="text-4xl leading-relaxed my-7">
         Iphone 12 Pro Worth <span class="mr-2 text-5xl text-lightBlue-500">$1200</span>
         <span class="text-xl">USD</span>
       </h1>
-      <form class="flex flex-col my-6" @submit.prevent="onSubmit">
+      <form class="flex flex-col my-6" @submit.prevent="onSubmitOne">
         <p class="mb-5 text-3xl font-semibold tracking-wider uppercase">
           Enter for a Chance to Win!
         </p>
@@ -186,8 +167,31 @@ export default defineComponent({
         </button>
       </form>
     </template>
-    <template v-if="step === 'final'">
-      <p>The Lorem ipsum dolor sit.</p>
+    <template v-if="step === `two`">
+      <p class="text-3xl font-semibold tracking-wider uppercase my-7 text-lightBlue-400">
+        You are almost there!
+      </p>
+      <p class="my-6">
+        NOTE: First 10,000 people who have completed all the tasks for the giveaway will be eligible
+        for a chance to win an exclusive gift from Revuer. The exclusive gift will be announced
+        during the time of winner selection.
+      </p>
+      <p class="my-3">Harvest Land has sponsored this amazing giveaway.</p>
+      <p class="my-3">Install Harvest Land and Play to Level 10 to qualify for this giveaway</p>
+      <form class="flex flex-col my-6" @submit.prevent="onSubmitTwo">
+        <label class="flex items-center justify-center text-left">
+          <input type="checkbox" class="mr-3 rounded" v-model="understandProcess" />
+          <span class="text-sm font-medium">Yes, I understand the qualification process.</span>
+        </label>
+        <button
+          type="submit"
+          class="mt-8 button-primary"
+          :class="!understandProcess && `cursor-not-allowed`"
+          :disabled="!understandProcess"
+        >
+          Enter Now
+        </button>
+      </form>
     </template>
   </div>
 </template>

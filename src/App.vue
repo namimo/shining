@@ -1,12 +1,6 @@
-<script lang="ts">
-import { defineComponent } from "vue"
+<script setup lang="ts">
 import Particles from "./components/Particles.vue"
 import Footer from "./components/Footer.vue"
-
-export default defineComponent({
-  components: { Particles, Footer },
-  setup: () => {},
-})
 </script>
 
 <template>

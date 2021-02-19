@@ -3,6 +3,10 @@ declare module "*.vue" {
 
   const component: DefineComponent<{}, {}, any>
   export default component
-}
 
-// shims-vue.d.ts
+  declare global {
+    interface Window {
+      renderCaptcha: () => void
+    }
+  }
+}

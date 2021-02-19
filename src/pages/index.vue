@@ -22,7 +22,7 @@ const isImageLoaded = ref(false)
         <img
           src="../assets/iphone.png"
           alt="iphone-stack"
-          :class="isImageLoaded && `scale-up-center`"
+          class="scale-up-center"
           @load="isImageLoaded = true"
         />
       </picture>

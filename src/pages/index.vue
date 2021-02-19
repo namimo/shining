@@ -7,6 +7,8 @@ useHead({
   title: "Iphone 12 PRO giveaway",
 })
 
+let endDate = "Feb 21, 2021"
+
 const isImageLoaded = ref(false)
 </script>
 
@@ -26,7 +28,7 @@ const isImageLoaded = ref(false)
           @load="isImageLoaded = true"
         />
       </picture>
-      <Timer v-if="isImageLoaded" />
+      <Timer v-if="isImageLoaded" :endDate="endDate" />
     </div>
     <router-link class="button-primary" to="/giveaway">PARTICIPATE NOW</router-link>
   </div>

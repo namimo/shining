@@ -171,13 +171,17 @@ const onSubmitTwo = () => {
       <p class="text-3xl font-semibold tracking-wider uppercase my-7 text-lightBlue-400">
         You are almost there!
       </p>
-      <p class="my-6">
-        NOTE: First 10,000 people who have completed all the tasks for the giveaway will be eligible
-        for a chance to win an exclusive gift from Revuer. The exclusive gift will be announced
-        during the time of winner selection.
+      <p class="my-6 text-lg">
+        <span class="uppercase">NOTE:</span> First 10,000 people who have completed all the tasks
+        for the giveaway will be eligible for a chance to win an exclusive gift from Revuer. The
+        exclusive gift will be announced during the time of winner selection.
       </p>
-      <p class="my-3">Harvest Land has sponsored this amazing giveaway.</p>
-      <p class="my-3">Install Harvest Land and Play to Level 10 to qualify for this giveaway</p>
+      <p class="my-3 text-lg">
+        <span class="uppercase">Harvest Land</span> has sponsored this amazing giveaway.
+      </p>
+      <p class="my-3 text-lg">
+        Install Harvest Land and Play to Level 10 to qualify for this giveaway
+      </p>
       <form class="flex flex-col my-6" @submit.prevent="onSubmitTwo">
         <label class="flex items-center justify-center text-left">
           <input type="checkbox" class="mr-3 rounded" v-model="understandProcess" />

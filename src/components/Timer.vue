@@ -43,7 +43,10 @@ export default defineComponent({
         >
           Expires On
         </div>
-        <div class="mt-3 text-2xl font-medium tracking-tighter md:py-3 md:text-5xl">
+        <div
+          class="mt-3 text-2xl font-medium tracking-tighter md:py-3 md:text-5xl"
+          v-if="difference > 0"
+        >
           {{ Math.floor(difference / day)
           }}<span class="ml-1 text-lg md:text-3xl text-lightBlue-400">D</span> :
           {{ Math.floor((difference % day) / hour)
@@ -52,6 +55,9 @@ export default defineComponent({
           }}<span class="ml-1 text-lg md:text-3xl text-lightBlue-400">M</span> :
           {{ Math.floor((difference % minute) / second)
           }}<span class="ml-1 text-lg md:text-3xl text-lightBlue-400">S</span>
+        </div>
+        <div class="mt-3 text-2xl font-medium tracking-wide md:py-3 md:text-5xl" v-else>
+          EXPIRED
         </div>
       </div>
     </div>

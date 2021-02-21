@@ -7,7 +7,7 @@ useHead({
   title: "Iphone 12 PRO giveaway",
 })
 
-let endDate = "Feb 21, 2021"
+let endDate = "2021/02/21 07:50:20 +0000"
 
 const isImageLoaded = ref(false)
 </script>

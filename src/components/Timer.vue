@@ -1,34 +1,33 @@
-<script lang="ts">
-import { defineComponent, ref, onBeforeUnmount, computed } from "vue"
+<script setup lang="ts">
+import { defineProps } from "vue"
+import { ref, onBeforeUnmount, computed } from "vue"
+
+const props = defineProps({
+  endDate: {
+    type: String,
+    required: true,
+  },
+})
 
 const second = 1000
 const minute = second * 60
 const hour = minute * 60
 const day = hour * 24
 
-export default defineComponent({
-  props: {
-    endDate: {
-      type: String,
-      required: true,
-    },
-  },
-  setup: (props) => {
-    const now = ref(new Date().getTime())
-    const endDate = ref(new Date(props.endDate).getTime())
-    const difference = computed(() => endDate.value - now.value)
+const now = ref(new Date().getTime())
+const endDate = ref(new Date(props.endDate).getTime())
+const difference = computed(() => endDate.value - now.value)
 
-    let timer: number
-    timer = setInterval(() => {
-      now.value = new Date().getTime()
-    }, 1000)
+const timer = setInterval(() => {
+  if (now.value >= endDate.value) {
+    clearInterval(timer)
+    return
+  }
+  now.value = new Date().getTime()
+}, 1000)
 
-    onBeforeUnmount(() => {
-      clearInterval(timer)
-    })
-
-    return { difference, second, minute, hour, day }
-  },
+onBeforeUnmount(() => {
+  clearInterval(timer)
 })
 </script>
 

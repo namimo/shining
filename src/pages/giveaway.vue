@@ -18,7 +18,7 @@ const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 useHead({
   title: "Giveaway Sign up",
 })
-const step = ref<"one" | "two">("two")
+const step = ref<"one" | "two">("one")
 
 const name = ref("")
 const email = ref("")

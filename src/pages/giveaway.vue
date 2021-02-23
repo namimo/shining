@@ -70,8 +70,7 @@ const onSubmitTwo = () => {
   <div id="bg"></div>
   <div id="bg-c"></div>
   <div
-    class="relative p-6 my-12 text-center text-white bg-coolGray-900 rounded-xl"
-    style="box-shadow: 0 10px 15px 0 rgb(0 0 0 / 40%)"
+    class="relative max-w-xl p-6 mx-auto my-12 text-center text-white bg-coolGray-900 shadow-custom rounded-xl"
   >
     <div class="mx-auto overflow-hidden border-4 rounded-full my-7 border-coolGray-700 w-60 h-60">
       <picture>

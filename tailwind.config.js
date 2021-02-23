@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         sans: ["Righteous", ...theme.fontFamily.sans],
       },
+      boxShadow: {
+        custom: "0 10px 15px 0 rgb(0 0 0 / 40%)",
+      },
     },
   },
   plugins: [

@@ -21,7 +21,7 @@ export const createApp = ViteSSG(
   {
     routes,
     scrollBehavior: () => {
-      return { top: 0 }
+      return { top: 0, behavior: "smooth" }
     },
   },
   (_ctx) => {},

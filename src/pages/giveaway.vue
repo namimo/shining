@@ -62,6 +62,7 @@ const onSubmitOne = () => {
   }
 
   step.value = "two"
+  window.scroll({ top: 0, behavior: "smooth" })
 }
 
 const onSubmitTwo = () => {

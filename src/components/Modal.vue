@@ -7,12 +7,13 @@ const toggle = () => {
   isOpen.value = !isOpen.value
 }
 
-watch(isOpen, () => {
-  const body = document.getElementsByTagName("body")[0]
-  if (body) {
-    body.style.overflow = isOpen.value ? "hidden" : "auto"
-  }
-})
+watch(
+  isOpen,
+  () => {
+    document.body.style.overflow = isOpen.value ? "hidden" : "auto"
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

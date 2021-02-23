@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import { useHead } from "@vueuse/head"
 import {
   Listbox,
@@ -10,6 +10,7 @@ import {
 } from "@headlessui/vue"
 import InputBase from "../components/InputBase.vue"
 import Recaptcha from "../components/Recaptcha.vue"
+import transitionMP3 from "../assets/transition-1.mp3"
 
 const SITE_KEY = "6LdK6lcaAAAAAN5X446f0lp2RbULquLINb5S7Gz2"
 const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -18,6 +19,8 @@ const COUNTRIES = ["Nepal", "America", "Spain", "Japan"]
 useHead({
   title: "Giveaway Sign up",
 })
+const transitionAudio = new Audio(transitionMP3)
+
 const step = ref<"one" | "two">("one")
 
 const name = ref("")
@@ -64,6 +67,10 @@ const onSubmitOne = () => {
 const onSubmitTwo = () => {
   console.log("two")
 }
+
+onMounted(() => {
+  transitionAudio.play()
+})
 </script>
 
 <template>

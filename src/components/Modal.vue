@@ -42,16 +42,21 @@ watch(isOpen, () => {
             leave-to-class="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
           >
             <div
-              class="relative z-30 inline-block p-4 text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6"
+              class="z-30 inline-block text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full"
               v-if="isOpen"
             >
-              <div class="absolute top-0 right-0 m-3.5 sm:m-5">
-                <button class="p-2 text-black rounded-full focus:outline-none" @click="toggle">
-                  <span class="sr-only">Close</span>
-                  <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
-                </button>
+              <div
+                class="relative p-4 overflow-y-auto sm:p-6"
+                style="max-height: calc(100vh - 150px)"
+              >
+                <div class="absolute top-0 right-0 m-3 sm:m-4.5">
+                  <button class="p-2 text-black rounded-full focus:outline-none" @click="toggle">
+                    <span class="sr-only">Close</span>
+                    <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
+                  </button>
+                </div>
+                <slot />
               </div>
-              <slot />
             </div>
           </transition>
         </div>

@@ -42,7 +42,7 @@ const isImageLoaded = ref(false)
       <Steps>
         <Step i="1">
           <template #icon>
-            <fa-solid-hand-point-up class="w-18 h-18" />
+            <fa-solid:hand-point-up class="w-18 h-18" />
           </template>
           <template #description>
             <div>
@@ -53,7 +53,7 @@ const isImageLoaded = ref(false)
         </Step>
         <Step i="2" reverse>
           <template #icon>
-            <fa-solid-file-alt class="w-18 h-18" />
+            <fa-solid:file-alt class="w-18 h-18" />
           </template>
           <template #description>
             <div>
@@ -64,7 +64,7 @@ const isImageLoaded = ref(false)
         </Step>
         <Step i="3">
           <template #icon>
-            <fa-solid-cloud-download-alt class="w-18 h-18" />
+            <fa-solid:cloud-download-alt class="w-18 h-18" />
           </template>
           <template #description>
             <div>

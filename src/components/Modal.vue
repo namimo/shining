@@ -52,7 +52,7 @@ watch(isOpen, () => {
                 <div class="absolute top-0 right-0 m-3 sm:m-4.5">
                   <button class="p-2 text-black rounded-full focus:outline-none" @click="toggle">
                     <span class="sr-only">Close</span>
-                    <fa-regular-times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
+                    <fa-regular:times-circle class="w-6 h-6 sm:w-8 sm:h-8" />
                   </button>
                 </div>
                 <slot />

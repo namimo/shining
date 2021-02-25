@@ -12,7 +12,7 @@
       to="/"
       class="inline-flex items-center justify-center px-8 py-3 mt-8 text-xl border border-white"
     >
-      <fa-solid-arrow-left class="mr-2" />Go home
+      <fa-solid:arrow-left class="mr-2" />Go home
     </router-link>
   </div>
 </template>

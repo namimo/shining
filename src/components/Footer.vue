@@ -71,7 +71,7 @@ const officialRules = [
   <footer class="relative max-w-xl px-4 py-8 mx-auto">
     <div class="flex flex-col items-center text-sm text-white md:text-base">
       <p class="inline-flex items-center">
-        <fa-solid-copyright class="mr-2" /> Copyright {{ new Date().getFullYear() }} - All Rights
+        <fa-solid:copyright class="mr-2" /> Copyright {{ new Date().getFullYear() }} - All Rights
         Reserved.
       </p>
       <div class="inline-flex mt-2 space-x-4 underline">

@@ -11,7 +11,7 @@ const props = defineProps({
 })
 const emit = defineEmit(["callback", "errorCallback"])
 
-const element = ref<HTMLElement | null>(null)
+const element = ref<HTMLElement>()
 
 onMounted(async () => {
   try {

@@ -1,3 +1,4 @@
+import { defineConfig } from "vite"
 import Vue from "@vitejs/plugin-vue"
 import Legacy from "@vitejs/plugin-legacy"
 import Pages from "vite-plugin-pages"
@@ -5,10 +6,7 @@ import ViteComponents from "vite-plugin-components"
 import ViteIcons, { ViteIconsResolver } from "vite-plugin-icons"
 import WindiCSS from "vite-plugin-windicss"
 
-/**
- * @type {import("vite").UserConfig}
- * */
-const config = {
+export default defineConfig({
   plugins: [
     // ...
     Vue(),
@@ -40,6 +38,4 @@ const config = {
     include: ["vue", "vue-router", "@vueuse/core"],
     exclude: ["vue-demi"],
   },
-}
-
-export default config
+})

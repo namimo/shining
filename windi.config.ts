@@ -1,7 +1,9 @@
-const colors = require("windicss/colors")
-const { theme } = require("windicss/defaultConfig")
+import { defineConfig } from "vite-plugin-windicss"
+import colors from "windicss/colors"
+import theme from "windicss/defaultTheme"
+import forms from "windicss/plugin/forms"
 
-module.exports = {
+export default defineConfig({
   shortcuts: {
     "button-primary":
       "inline-flex items-center justify-center px-12 py-3 text-lg font-semibold tracking-wide rounded-full bg-gradient-to-br from-lightBlue-500 to-gray-700 lg:text-3xl focus:outline-none",
@@ -20,6 +22,6 @@ module.exports = {
   },
   plugins: [
     // ...
-    require("windicss/plugin/forms"),
+    forms,
   ],
-}
+})
